@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Designing an HTML form!!</title>
+    <link rel="stylesheet" href="3Q2GStyle.css">
+
+<script>
+    // Displays a confirmation dialog before final form submission
+    function confirmSubmission(){
+        return confirm("Are you sure all information in the submission is complete and true?");
+    }
+    // Confirms if the user really wants to reset all entered form data
+    function confirmReset(){
+        return confirm("Are you sure you want to reset this form?");
+    }
+    // Adds or removes an error class if the field is left blank
+    // This improves user feedback without submitting the form
+    function checkBlank(field){
+        if(field.value.trim() === ""){
+            field.classList.add("Error");
+        } else {
+            field.classList.remove("Error");
+        }
+    }
+    // Saves the student signup information to localStorage
+    // Data is stored as an array of objects to allow multiple sign-ups
+    function saveSignup(event){
+        event.preventDefault(); // Prevents page reload on submit
+        // Stop submission if user cancels confirmation
+        if(!confirmSubmission()) return;
+        // Retrieve existing signups or initialize a new array
+        let signups = JSON.parse(localStorage.getItem("signups")) || [];
+        let form = event.target;
+        // Create an object representing one student's signup
+        let signupData = {
+            id: form.studentID.value,
+            name: form.userName.value,
+            email: form.eMail.value,
+            mobile: form.mobilePhone.value,
+            grade: form.gradeLevel.options[form.gradeLevel.selectedIndex].text,
+            residency: form.residency.value === "I" ? "Intern" : "Extern",
+            club: form.preferredEC.options[form.preferredEC.selectedIndex].text
+        };
+        // Add new signup to the array
+        signups.push(signupData);
+        // Save updated signup list back to localStorage
+        localStorage.setItem("signups", JSON.stringify(signups));
+        alert("Signup saved successfully!");
+        form.reset();
+    }
+</script>
+
+</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiftie Verse</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sodium's Friday Schedule</title>
+  
+<link rel="stylesheet" href="something.css"> 
+<style>
+    body{
+        background-image: url(https://media.architecturaldigest.com/photos/664215bbe8f993fb5b10e7dc/16:9/w_2560%2Cc_limit/GettyImages-2152509342.jpg);
+
+    }
+    header h1{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    div{
+        background-image: url(https://assets.aboutamazon.com/dc/87/3905790f45d6a3f2eedaef596151/still-image-1.jpg);
+        color:aliceblue;
+        font-size: 25px;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: rgb(255, 255, 255);
+    }
+
+    a:visited {
+      color:rgb(255, 255, 255);
+    }
+</style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="logo" style="width:80px; height:auto;">  
+    <h1> Swiftie Verse: 
+
+    </h1>
+    <h3>A journey through the different eras of Taylor Swift </h3>
+  </header>
+</body>
+
+  <nav>
+    <ul>
+      <li><a href="signup.html">SignUp</a></li>
+      <li><a href="./index.html">Home</a></li>
+        <li><a href="albums.html">Albums</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="concerts.html"><strong>Concerts</strong></a></li>
+        <li><a href="about.html">About TS</a></li>
+        <li><a href="sources.html">Sources</a></li>
+    </ul>
+  </nav>
+
+</html>
+
+<body>
+<h1> Registering As A Swiftie: </h1>
+
+<form onsubmit="saveSignup(event)" onreset="return confirmReset();">
+
+    <fieldset>
+        <legend>Swiftie Information</legend>
+
+        <label>ID Number
+            <input type="number" name="studentID" required>
+        </label><br><br>
+
+        <label>Full Name:
+            <input type="text" name="userName" required onblur="checkBlank(this)">
+        </label><br><br>
+
+        <label>Email:
+            <input type="email" name="eMail" required>
+        </label><br><br>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>Additional Information</legend>
+
+        <label>Mobile Phone:
+            <input type="text" name="mobilePhone" required onblur="checkBlank(this)">
+        </label><br><br>
+
+        <label>Grade Level (if student):
+            <select name="gradeLevel" required>
+                <option value=""></option>
+                <option>Grade 7</option>
+                <option>Grade 8</option>
+                <option>Grade 9</option>
+                <option>Grade 10</option>
+                <option>Grade 11</option>
+                <option>Grade 12</option>
+                <option>Not a Student</option>
+            </select>
+        </label><br>
+
+        <p>Residency Type:</p>
+        <label><input type="radio" name="residency" value="I" required> Intern</label><br>
+        <label><input type="radio" name="residency" value="E"> Extern</label><br><br>
+
+        <p> After submitting, GO TO HOME PLEASE !!!!</p>
+
+        <br>
+    </fieldset>
+<br>
+    <input type="submit" value="Submit Application">
+    <input type="reset" value="Reset Application">
+    <br><br>
+
+    <a href="viewSignUps.html">View Signups</a>
+
+    <br>
+
+</form>
+  <footer>
+    <p>© Frances Reanna Rugayan & Saulenn Jeisha Refuerzo, 2025</p>
+  </footer>
+</body>
+
+</html>
